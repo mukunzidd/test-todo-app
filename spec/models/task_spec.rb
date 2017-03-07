@@ -56,18 +56,19 @@ RSpec.describe Task, type: :model do
   # Task decrement priority! test
   describe '#decrement_priority' do
     it 'should return increase priority by 1 if priority is less than ten' do
-      task = Task.new(priority: 5)xx  xxxxxxxx
+      task = Task.new(priority: 5)
       task.decrement_priority!
-      expect(task.priority).to eq(4)
+      expect(task.priority).to eql(4)
     end
   end
 
   # Task snooze_hour! test
   describe '#snooze_hour' do
     it 'should return push the deadline by one hour' do
-      task = Task.new(deadline: Time.now)
+      deadline = Time.now
+      task = Task.new(deadline: deadline)
       task.snooze_hour!
-      expect(task.deadline).to eq(Time.now + 1.hour)
+      expect(task.deadline).to eq(deadline + 1.hour)
     end
   end
 end
