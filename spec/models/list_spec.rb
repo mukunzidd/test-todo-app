@@ -52,4 +52,35 @@ RSpec.describe List, type: :model do
 			expect(list.total_duration).to eq(3)
 		end
 	end
+
+	# INCOMPLETE TASKS
+	describe '#incomplete_tasks' do
+		it 'should return an array of incomplete_tasks' do 
+			# Creating an example
+			list = List.create(name: 'Today\'s Chores')
+			task2 = Task.create(name: 'take out the trash', list_id: list.id, complete: false)
+			task3 = Task.create(name: 'push ups', list_id: list.id, complete: false)
+			task5 = Task.create(name: 'jogging', list_id: list.id, complete: true)
+			task4 = Task.create(name: 'meeting with Joe', list_id: list.id, complete: false)
+
+			# Test
+			expect(list.incomplete_tasks).to eq([task2, task3, task4])
+		end
+	end
+
+	# FAVORITE TASKS
+	describe '#favorite_tasks' do
+		it 'should an array of favorite_tasks' do 
+			# Creating an example
+			list = List.create(name: 'Today\'s Chores')
+			task2 = Task.create(name: 'take out the trash', list_id: list.id, favorite: false)
+			task3 = Task.create(name: 'Meeting Mark', list_id: list.id, favorite: false)
+			task5 = Task.create(name: 'push up some code', list_id: list.id, favorite: true)
+			task4 = Task.create(name: 'Design a logo', list_id: list.id, favorite: true)
+
+			# Test
+			expect(list.favorite_tasks).to eq([task5, task4])
+		end
+	end
+
 end
