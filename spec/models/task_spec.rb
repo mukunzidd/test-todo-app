@@ -26,4 +26,16 @@ RSpec.describe Task, type: :model do
       expect(task.favorite).to eq(true)
     end
   end
+
+  describe '#overdue?' do
+    it 'should return true if Time.now > deadline!' do
+      task = Task.new(deadline: Time.now - 2.hours)
+      expect(task.overdue?).to eq(true)
+    end
+
+    it 'should return true if Time.now > deadline!' do
+      task = Task.new(deadline: Time.now + 2.hours)
+      expect(task.overdue?).to eq(false)
+    end
+  end
 end
