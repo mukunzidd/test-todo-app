@@ -6,7 +6,7 @@ RSpec.describe List, type: :model do
 	describe '#complete_all_tasks!' do
 		it 'should return all tasks of a list  with complete true if they started false' do
 
-			# Creating an example
+			# Creating examples
 			list = List.new(name: 'Today\'s Chores')
 			Task.create(name: 'take out the trash', list_id: list.id, complete: false)
 			Task.create(name: 'push up some code', list_id: list.id, complete: false)
@@ -24,13 +24,14 @@ RSpec.describe List, type: :model do
 	# SNOOZE ALL TASKS
 	describe '#snooze_all_tasks' do
 		it 'should push the deadline to an hour later' do
-			# Creating an example
+
+			# Creating examples
 			deadline = Time.now
 			list = List.new(name: 'Today\'s Chores')
 			Task.create(name: 'take out the trash', list_id: list.id, deadline: deadline)
-			Task.create(name: 'push up some code', list_id: list.id, deadline: deadline)
+			Task.create(name: 'push up some code', list_id: list.id, deadline: deadline + 2.hours)
 
-			# Trigger Complete all tasks
+			# Trigger snoose all tasks
 			list.snooze_all_tasks!
 
 			# Test Snooze all tasks
@@ -43,7 +44,8 @@ RSpec.describe List, type: :model do
 	# TOTAL DURATION OF ALL TASKS
 	describe '#total_duration' do
 		it 'should return the total duration of all tasks of the list' do 
-			# Creating an example
+
+			# Creating examples
 			list = List.create(name: 'Today\'s Chores')
 			Task.create(name: 'take out the trash', list_id: list.id, duration: 1)
 			Task.create(name: 'push up some code', list_id: list.id, duration: 2)
@@ -56,7 +58,8 @@ RSpec.describe List, type: :model do
 	# INCOMPLETE TASKS
 	describe '#incomplete_tasks' do
 		it 'should return an array of incomplete_tasks' do 
-			# Creating an example
+
+			# Creating examples
 			list = List.create(name: 'Today\'s Chores')
 			task2 = Task.create(name: 'take out the trash', list_id: list.id, complete: false)
 			task3 = Task.create(name: 'push ups', list_id: list.id, complete: false)
@@ -70,8 +73,9 @@ RSpec.describe List, type: :model do
 
 	# FAVORITE TASKS
 	describe '#favorite_tasks' do
-		it 'should an array of favorite_tasks' do 
-			# Creating an example
+		it 'should an array of favorite_tasks' do
+
+			# Creating examples
 			list = List.create(name: 'Today\'s Chores')
 			task2 = Task.create(name: 'take out the trash', list_id: list.id, favorite: false)
 			task3 = Task.create(name: 'Meeting Mark', list_id: list.id, favorite: false)
